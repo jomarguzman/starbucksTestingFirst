@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="AutomationStarbucks">
+	<parameter name="browser" value="chrome"></parameter>
+	
+    <test name="StarbucksPage">
+        <classes>
+            <class
+                name="com.automation.tests.StarbucksTest" />
+        </classes>
+    </test>
+</suite>
