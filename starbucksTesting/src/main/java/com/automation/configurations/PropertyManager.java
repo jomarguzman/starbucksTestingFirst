@@ -4,16 +4,22 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class PropertyManager {
+	
+	Logger logger = LoggerFactory.getLogger(PropertyManager.class);
+
 	private static PropertyManager instance;
     private static final Object lock = new Object();
     private static String propertyFilePath = System.getProperty("user.dir")+
     		"\\src\\test\\resources\\configuration.properties";
     private static String url;
     private static String menuOptions;
-    private static String wrongUsername;
-    private static String wrongPassword;
- 
+    private static String menuOption;
+    private static String subMenuOption;
+    
     //Create a Singleton instance. We need only one instance of Property Manager.
     public static PropertyManager getInstance () {
         if (instance == null) {
@@ -35,14 +41,14 @@ public class PropertyManager {
             prop.load(new FileInputStream(propertyFilePath));
             //prop.load(this.getClass().getClassLoader().getResourceAsStream("configuration.properties"));
         } catch (IOException e) {
-            System.out.println("Configuration properties file cannot be found");
+            logger.error("Configuration properties file cannot be found");
         }
  
         //Get properties from configuration.properties
         url = prop.getProperty("url");
         menuOptions = prop.getProperty("options");
-        wrongUsername = prop.getProperty("wrongUsername");
-        wrongPassword = prop.getProperty("wrongPassword");
+        menuOption = prop.getProperty("option");
+        subMenuOption = prop.getProperty("subMenu");
     }
  
     public String getURL () {
@@ -53,12 +59,12 @@ public class PropertyManager {
     	return menuOptions;
     }
     
-    public String getWrongUsername () {
-        return wrongUsername;
+    public String getMenuOption() {
+    	return menuOption;
     }
- 
-    public String getWrongPassword () {
-        return wrongPassword;
+    
+    public String getSubMenuOption () {
+        return subMenuOption;
     }
 
 }

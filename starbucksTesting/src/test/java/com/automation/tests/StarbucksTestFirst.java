@@ -3,17 +3,24 @@ package com.automation.tests;
 import java.util.Arrays;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.automation.configurations.PropertyManager;
 import com.automation.pages.StarbucksHomePage;
 
-public class StarbucksTest extends BaseTest{
+public class StarbucksTestFirst extends BaseTest{
 	
-	@Test
+	Logger logger = LoggerFactory.getLogger(StarbucksTestFirst.class);
+	
+	@Test( groups="firstTest")
 	public void testStarbucksSearch(){
-		StarbucksHomePage home = getStarbucksHomePage();
+		
+		logger.info("Running 1st Test");
+		
+		StarbucksHomePage home = new StarbucksHomePage(myDriver.getDriver());
 		List<String> menuItems = home.menuOptions();
 		List<String> optionsToCompare = Arrays.asList(new PropertyManager().getInstance().getMenuOptions().trim().split(","));
 		

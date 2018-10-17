@@ -1,11 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="AutomationStarbucks">
-	<parameter name="browser" value="chrome"></parameter>
 	
-    <test name="StarbucksPage">
+    <test name="StarbucksPageFirst">
+    	<parameter name="browser" value="default"></parameter>
+    	<groups>
+        	<run>
+        		<include name="firstTest"></include>
+        	</run>
+        </groups>
         <classes>
             <class
-                name="com.automation.tests.StarbucksTest" />
+                name="com.automation.tests.StarbucksTestFirst" />
         </classes>
+        
     </test>
+    
+    <test name="StarbucksPageSecond">
+    	<parameter name="browser" value="chrome" />
+	    <groups>
+	        <run>
+	            <include name="secondTest" />
+	        </run>
+	    </groups>
+        <classes>
+            <class name="com.automation.tests.StarbucksTestSecond" />
+        </classes>
+	</test>
+	
+	<test name="StarbucksPageThird">
+		<parameter name="browser" value="firefox" />
+	    <groups>
+	        <run>
+	            <include name="thirdTest" />
+	        </run>
+	    </groups>
+        <classes>
+            <class name="com.automation.tests.StarbucksTestThird" />
+        </classes>
+	</test>
 </suite>

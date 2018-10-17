@@ -1,7 +1,7 @@
 package com.automation.tests;
 
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
 import com.automation.driver.MyDriver;
@@ -13,20 +13,16 @@ public class BaseTest {
 	
 	private StarbucksHomePage starbucksHome;
 	
-	@BeforeSuite(alwaysRun=true)
+	@BeforeTest(alwaysRun=true)
 	@Parameters({"browser"})
-	public void beforeSuite(String browser) {
+	public void beforeTest(String browser) {
 		myDriver = new MyDriver(browser);
 		starbucksHome = new StarbucksHomePage(myDriver.getDriver());
 	}
 	
-	@AfterSuite(alwaysRun=true)
-	public void afterSuite() {
+	@AfterTest(alwaysRun=true)
+	public void afterTest() {
 		starbucksHome.dispose();
-	}
-	
-	public StarbucksHomePage getStarbucksHomePage() {
-		return starbucksHome;
 	}
 	
 }
