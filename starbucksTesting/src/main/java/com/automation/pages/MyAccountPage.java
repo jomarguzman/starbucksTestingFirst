@@ -7,11 +7,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.automation.base.BasePage;
 import com.automation.configurations.PropertyManager;
 
 public class MyAccountPage extends BasePage{
+	
+	Logger logger = LoggerFactory.getLogger(MyAccountPage.class);
 	
 	public MyAccountPage(WebDriver pDriver) {
 		super(pDriver);
@@ -31,22 +35,23 @@ public class MyAccountPage extends BasePage{
 	@FindBy(id="recipientEmail")
 	WebElement recipientEmail;
 	
-	@FindBy(css="visible")
-	WebElement buttonContainer;
+	@FindBy(tagName="form")
+	WebElement formGift;
 	
 	public String selectGift(String name, String email) {
+		
 		WebElement option = findWebElement(menuOptions, "Gift");
 		getWait().until(ExpectedConditions.elementToBeClickable(option));
 		option.click();
 		
-		getWait().until(ExpectedConditions.elementToBeClickable(gifOptions));
 		gifOptions.click();
 		
 		fillInput(recipientName, name);
 		fillInput(recipientEmail, email);
-		checkoutGift(buttonContainer);
+		formGift.submit();
 		
 		getWaitSeconds(100);
+		
 		return getURL();
 	}
 	
@@ -58,17 +63,11 @@ public class MyAccountPage extends BasePage{
 		List<WebElement> options = menuOptions.findElements(By.tagName("li"));
 		for (WebElement webElement : options) {
 			if(webElement.getText().equalsIgnoreCase(value)) {
-				System.out.println(webElement.getText());
+				logger.info("Element selected: {}", webElement.getText());
 				return webElement;
 			}
 		}
 		return null;
-	}
-	
-	private void checkoutGift(WebElement container) {
-		WebElement submit = container.findElement(By.tagName("button"));
-		getWait().until(ExpectedConditions.elementToBeClickable(submit));
-		submit.click();
 	}
 	
 }

@@ -15,7 +15,7 @@ public class StarbucksTestFirst extends BaseTest{
 	
 	Logger logger = LoggerFactory.getLogger(StarbucksTestFirst.class);
 	
-	@Test( groups="firstTest")
+	@Test(groups="firstTest")
 	public void testStarbucksSearch(){
 		
 		logger.info("Running 1st Test");

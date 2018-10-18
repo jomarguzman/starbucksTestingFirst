@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import com.automation.data.AccountDataProvider;
 import com.automation.pages.AccountSigning;
 import com.automation.pages.MyAccountPage;
+import com.automation.pages.PaymentOption;
 import com.automation.pages.StarbucksHomePage;
 
 public class StarbucksTestThird extends BaseTest{
@@ -20,14 +21,16 @@ public class StarbucksTestThird extends BaseTest{
 		StarbucksHomePage home = new StarbucksHomePage(myDriver.getDriver());
 		AccountSigning loginPage = new AccountSigning(myDriver.getDriver());
 		MyAccountPage myAccountPage = new MyAccountPage(myDriver.getDriver());
+		PaymentOption paymentOption = new PaymentOption(myDriver.getDriver());
 		
 		home.navigateHomePage();
 		loginPage.signIn(userName, userPassword);
-		String currentURL = myAccountPage.selectGift(userName,userPassword);
-		Assert.assertEquals(currentURL, "https://www.starbucks.com/account/signin");
+		myAccountPage.selectGift("userName","mail@mymail.com");
+		String currentURL = paymentOption.pay();
+		Assert.assertEquals(currentURL, "https://app.starbucks.com/gift/873069716#payment");
 	}
 	
-	@Test ( groups="thirdTest", dataProvider = "giftDataProvider", dataProviderClass = AccountDataProvider.class)
+	@Test ( enabled = false, groups="thirdTest", dataProvider = "giftDataProvider", dataProviderClass = AccountDataProvider.class)
 	public void testStarbucksSearch(String userName, String userPassword){
 		MyAccountPage myAccountPage = new MyAccountPage(myDriver.getDriver());
 		String currentURL = myAccountPage.selectGift(userName,userPassword);

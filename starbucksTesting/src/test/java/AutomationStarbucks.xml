@@ -5,7 +5,7 @@
     	<parameter name="browser" value="default"></parameter>
     	<groups>
         	<run>
-        		<include name="firstTest"></include>
+        		<include name="firstTest" />
         	</run>
         </groups>
         <classes>
