@@ -16,16 +16,16 @@ public class MyDriver {
 	public MyDriver(String browser) {
 		switch (browser) {
 		case "firefox":
-			System.setProperty("webdriver.gecko.driver", "src/test/resources/drivers/geckodriver.exe");
+			setFirefox();
 			driver = new FirefoxDriver();
 			break;
 		case "chrome":
-			System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
+			setChrome();
 			driver = new ChromeDriver();
 			break;
 		default:
 			logger.info("default IExplorer");
-			System.setProperty("webdriver.ie.driver", "src/test/resources/drivers/MicrosoftWebDriver.exe");
+			setIE();
 			driver = new InternetExplorerDriver();
 			logger.info("default IExplorer");
 			break;
@@ -35,5 +35,28 @@ public class MyDriver {
 	public WebDriver getDriver() {
 		return driver;
 	}
-	
+
+	private void setChrome(){
+		if (System.getProperty("os.name").contains("Mac")) {
+			System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver");
+		} else {
+			System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
+		}
+	}
+
+	private void setFirefox(){
+		if (System.getProperty("os.name").contains("mac")) {
+			System.setProperty("webdriver.gecko.driver", "src/test/resources/drivers/geckodriver");
+		} else {
+			System.setProperty("webdriver.gecko.driver", "src/test/resources/drivers/geckodriver.exe");
+		}
+	}
+
+	private void setIE(){
+		if (System.getProperty("os.name").equalsIgnoreCase("mac")) {
+			System.setProperty("webdriver.gecko.driver", "src/test/resources/drivers/MicrosoftWebDriver");
+		} else {
+			System.setProperty("webdriver.gecko.driver", "src/test/resources/drivers/MicrosoftWebDriver.exe");
+		}
+	}
 }
